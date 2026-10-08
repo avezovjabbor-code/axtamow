@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 800px;
+    background: #1e293b;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+#game-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+}
+
+#road {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    top: -100%;
+    background: #2a2a2a;
+    background-image: linear-gradient(0deg, transparent 50%, #fff 50%);
+    background-size: 10px 100px;
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+.road-animation {
+    animation: moveRoad linear infinite;
+}
+
+@keyframes moveRoad {
+    100% {
+        top: 0;
+    }
+}
+
+.car {
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    z-index: 10;
+    transition: left 0.1s ease;
+}
+
+/* Base car styles (roof, windshields) */
+.car::before, .car::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    background: #111;
+    border-radius: 3px;
+}
+.car::before {
+    top: 20%;
+    height: 18px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.car::after {
+    bottom: 15%;
+    height: 12px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+/* Lights */
+.lights {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.lights::before, .lights::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    width: 12px;
+    height: 6px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 -5px 15px rgba(255, 255, 255, 0.8);
+}
+.lights::before { left: 5px; }
+.lights::after { right: 5px; }
+
+/* Car Types */
+.player {
+    bottom: 30px;
+    left: calc(50% - 25px);
+}
+
+.car-malibu {
+    background: #f1f5f9;
+}
+.car-gentra {
+    background: #0f172a;
+    border: 1px solid #334155;
+}
+.car-gentra .lights::before, .car-gentra .lights::after {
+    background: #ffdb58;
+}
+.car-spark {
+    background: #facc15;
+    height: 85px; /* Shorter */
+}
+.car-cobalt {
+    background: #94a3b8;
+}
+
+.enemy-car {
+    top: -120px;
+}
+
+/* Taillights for enemies */
+.enemy-car .lights::before, .enemy-car .lights::after {
+    top: auto;
+    bottom: 5px;
+    background: #ef4444;
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.8);
+}
+
+#ui-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+#score-display {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+    padding: 20px;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+h1 {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    color: #cbd5e1;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+button {
+    background: linear-gradient(45deg, #3b82f6, #6366f1);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(59, 130, 246, 0.4);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+.car-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.car-option {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.car-option.selected {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.2);
+}
+
+.controls-hint {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #94a3b8;
+}

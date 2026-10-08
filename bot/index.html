@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'zbek Avto Poyga</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-wrapper">
+        <div id="game-container">
+            <div id="road"></div>
+            
+            <div id="player-car" class="car player">
+                <div class="lights"></div>
+            </div>
+            
+            <div id="ui-layer">
+                <div id="score-display">Hisob: <span id="score">0</span></div>
+                
+                <div id="start-screen" class="screen">
+                    <h1>Toshkent Yo'llari</h1>
+                    <p>O'zbek avtosanoati durdonalari bilan poyga! Boshqa mashinalarga urilib ketmang.</p>
+                    <div class="car-selection">
+                        <div class="car-option selected" data-car="malibu">Malibu (Oq)</div>
+                        <div class="car-option" data-car="gentra">Gentra (Qora)</div>
+                        <div class="car-option" data-car="spark">Spark (Sariq)</div>
+                    </div>
+                    <button id="start-btn">O'yinni boshlash</button>
+                    <p class="controls-hint">Boshqarish: Chap/O'ng strelkalar yoki ekranga bosish</p>
+                </div>
+                
+                <div id="game-over-screen" class="screen hidden">
+                    <h1>AVARIYA!</h1>
+                    <p>Siz <span id="final-score">0</span> ta mashinani ortda qoldirdingiz.</p>
+                    <button id="restart-btn">Qayta o'ynash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
